@@ -18,3 +18,5 @@ yarn deploy --outputs-file ./utils/api-id.json
 # Get docs from APIGateway; deep-merge local docs
 yarn spec
 ```
+
+![Swagger documentation in preview, within vscode](./auto-gen-swagger.gif)

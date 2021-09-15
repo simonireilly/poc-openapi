@@ -2,6 +2,6 @@ export interface User {
   id: number;
   email: string;
   name: string;
-  status?: "Happy" | "Sad";
+  status?: 'Happy' | 'Sad';
   phoneNumbers: string[];
 }

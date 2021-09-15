@@ -1,14 +1,14 @@
-import { User } from "../models/user";
+import { User } from '../models/user';
 
-export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
+export type UserCreationParams = Pick<User, 'email' | 'name' | 'phoneNumbers'>;
 
 export class UsersService {
   public get(id: number, name?: string): User {
     return {
       id,
-      email: "jane@doe.com",
-      name: name ?? "Jane Doe",
-      status: "Happy",
+      email: 'jane@doe.com',
+      name: name ?? 'Jane Doe',
+      status: 'Happy',
       phoneNumbers: [],
     };
   }
@@ -16,7 +16,7 @@ export class UsersService {
   public create(userCreationParams: UserCreationParams): User {
     return {
       id: Math.floor(Math.random() * 10000), // Random
-      status: "Happy",
+      status: 'Happy',
       ...userCreationParams,
     };
   }
