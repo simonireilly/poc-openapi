@@ -1,0 +1,23 @@
+{
+  "name": "poc-openapi",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "sst test",
+    "spec": "npx ts-node ./utils/generate-spec",
+    "start": "sst start",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.114.0",
+    "@types/aws-lambda": "^8.10.70"
+  },
+  "dependencies": {
+    "@aws-cdk/core": "1.114.0",
+    "@serverless-stack/cli": "0.42.1",
+    "@serverless-stack/resources": "0.42.1",
+    "tsoa": "^3.11.2"
+  }
+}

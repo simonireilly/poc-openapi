@@ -1,0 +1,201 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"User": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"Happy",
+							"Sad"
+						]
+					},
+					"phoneNumbers": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"name",
+					"phoneNumbers"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_User.email-or-name-or-phoneNumbers_": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"phoneNumbers": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"email",
+					"name",
+					"phoneNumbers"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"UserCreationParams": {
+				"$ref": "#/components/schemas/Pick_User.email-or-name-or-phoneNumbers_"
+			}
+		},
+		"securitySchemes": {
+			"sigv4": {
+				"type": "apiKey",
+				"name": "Authorization",
+				"in": "header",
+				"x-amazon-apigateway-authtype": "awsSigv4"
+			}
+		}
+	},
+	"info": {
+		"title": "dev-poc-openapi-Api",
+		"version": "2021-09-15 21:41:12UTC"
+	},
+	"openapi": "3.0.1",
+	"paths": {
+		"/users/{userId}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					},
+					"default": {
+						"description": "Default response for GET /users/{userId}"
+					}
+				},
+				"security": [
+					{
+						"sigv4": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"x-amazon-apigateway-integration": {
+					"payloadFormatVersion": "2.0",
+					"type": "aws_proxy",
+					"httpMethod": "POST",
+					"uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:322567890963:function:dev-poc-openapi-my-stack-ApiLambdaGETusersuserId6F-Scvi62bcs4ti/invocations",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/users": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"201": {
+						"description": "Created"
+					},
+					"default": {
+						"description": "Default response for POST /users"
+					}
+				},
+				"security": [
+					{
+						"sigv4": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserCreationParams"
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"payloadFormatVersion": "2.0",
+					"type": "aws_proxy",
+					"httpMethod": "POST",
+					"uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:322567890963:function:dev-poc-openapi-my-stack-ApiLambdaPOSTusers5643B07-R8uhHDo5HKWU/invocations",
+					"connectionType": "INTERNET"
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		},
+		{
+			"url": "https://zkyhuu6xhl.execute-api.us-east-1.amazonaws.com/{basePath}",
+			"variables": {
+				"basePath": {
+					"default": ""
+				}
+			}
+		}
+	],
+	"x-amazon-apigateway-cors": {
+		"allowMethods": [
+			"*"
+		],
+		"allowHeaders": [
+			"*"
+		],
+		"maxAge": -42,
+		"allowCredentials": false,
+		"allowOrigins": [
+			"*"
+		]
+	},
+	"x-amazon-apigateway-importexport-version": "1.0"
+}
